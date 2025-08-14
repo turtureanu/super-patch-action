@@ -151,35 +151,35 @@ jobs:
                 SELECTION_SUPER=${{ github.event.inputs.SUPER_COMPRESS }}
                 case "$SELECTION_GSI" in
                     "img.gz")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         gzip -d *.img.gz
                         ;;
                     "img.xz")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         xz -d *.img.xz
                         ;;
                     "tar.xz")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         tar -xvf *.tar.xz
                         ;;
                     "tar.gz")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         tar -xvf *.tar.gz
                         ;;
                     "zip")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         unzip *.zip
                         ;;
                     "7z")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         7z x *.7z
                         ;;
                     "xz")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         xz -d *.xz
                         ;;
                     "No compression")
-                        aria2c -x 15 $GSILINK
+                        wget $GSILINK
                         ;;
                 esac
                 if [ -e system.img ]; then
