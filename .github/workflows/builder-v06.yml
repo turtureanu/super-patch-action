@@ -190,27 +190,27 @@ jobs:
                 cd image_build
                 case "$SELECTION_SUPER" in
                     "tar")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         tar -xvf *.tar
                         ;;
                     "tar.xz")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         tar -xvf *.tar.xz
                         ;;
                     "tar.gz")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         tar -xvf *.tar.gz
                         ;;
                     "zip")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         unzip *.zip
                         ;;
                     "7z")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         7z x *.7z
                         ;;
                     "uncompressed")
-                        aria2c -x 15 $SUPERLINK
+                        wget $SUPERLINK
                         ;;
                 esac
                 cd ..
