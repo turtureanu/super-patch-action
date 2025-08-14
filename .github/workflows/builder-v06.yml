@@ -414,7 +414,7 @@ jobs:
                         - Please prepare a backup of a working super.img file because there will be tendencies that the ROM would not work.
 
               env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
             
             - name: Send to SFTP
               if: ${{ github.event.inputs.SFTP_SERVER_DESTINATION }}
