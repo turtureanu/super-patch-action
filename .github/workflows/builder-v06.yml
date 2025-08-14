@@ -117,6 +117,9 @@ jobs:
                 pwd >> directory.txt
                 LOCPOINT=$(pwd)
                 echo "Location Point: $LOCPOINT"
+                curl -Lo ffsend https://github.com/timvisee/ffsend/releases/download/v0.2.77/ffsend-v0.2.77-linux-x64-static
+                sudo mv ./ffsend /usr/bin/
+                sudo chmod +x /usr/bin/ffsend
 
             - name: Grab Utils
               run: |
@@ -190,27 +193,27 @@ jobs:
                 cd image_build
                 case "$SELECTION_SUPER" in
                     "tar")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         tar -xvf *.tar
                         ;;
                     "tar.xz")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         tar -xvf *.tar.xz
                         ;;
                     "tar.gz")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         tar -xvf *.tar.gz
                         ;;
                     "zip")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         unzip *.zip
                         ;;
                     "7z")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         7z x *.7z
                         ;;
                     "uncompressed")
-                        aria2c -x 15 $SUPERLINK
+                        ffsend download $SUPERLINK
                         ;;
                 esac
                 cd ..
@@ -425,14 +428,6 @@ jobs:
                 localDir: rel/
                 remoteDir: ${{ github.event.inputs.SFTP_SERVER_DESTINATION }}
 
-            - name: Send alert to Telegram users via Bots
-              run: |
-                curl -X POST \
-                https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendMessage \
-                -d chat_id=${{secrets.TELEGRAM_TO}} \
-                -d text="Super Patch in Action Released Something!!! %0A%0A Release Name: ${{ github.event.inputs.GITHUB_RELEASE_HEADING }} %0A%0A Build ID: ${{ github.run_id }} %0A%0A Super Image Used: ${{ github.event.inputs.SUPER_IMAGE_URL }} %0A%0A GSI ROM Used: ${{ github.event.inputs.GSI_ROM_LINK }} %0A%0A Mirror: ${{secrets.SFTP_REPO_LINK}} %0A%0A Builder Used: Next Generation Super.img Patcher v06 - Febuary 2025 %0A%0A Notes: %0A%0A - Please prepare a backup of super.img and your personal data before doing this" \
-                -d reply_markup='{"inline_keyboard": [[{"text": "Download from GitHub", "url": "https://github.com/MizProject/super-patch-action/releases/tag/${{github.run_id}}"}, {"text": "Check Mirror Repository", "url": "${{secrets.SFTP_REPO_LINK}}"}]]}'
-                
 
 
             
