@@ -117,9 +117,6 @@ jobs:
                 pwd >> directory.txt
                 LOCPOINT=$(pwd)
                 echo "Location Point: $LOCPOINT"
-                curl -Lo ffsend https://github.com/timvisee/ffsend/releases/download/v0.2.77/ffsend-v0.2.77-linux-x64-static
-                sudo mv ./ffsend /usr/bin/
-                sudo chmod +x /usr/bin/ffsend
 
             - name: Grab Utils
               run: |
@@ -193,27 +190,27 @@ jobs:
                 cd image_build
                 case "$SELECTION_SUPER" in
                     "tar")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         tar -xvf *.tar
                         ;;
                     "tar.xz")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         tar -xvf *.tar.xz
                         ;;
                     "tar.gz")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         tar -xvf *.tar.gz
                         ;;
                     "zip")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         unzip *.zip
                         ;;
                     "7z")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         7z x *.7z
                         ;;
                     "uncompressed")
-                        ffsend download $SUPERLINK
+                        aria2c -x 15 $SUPERLINK
                         ;;
                 esac
                 cd ..
