@@ -212,7 +212,7 @@ jobs:
                         ;;
                     "lz4")
                         wget $SUPERLINK
-                        lz4 -d *.lz4
+                        lz4 -d super.img.lz4 super.img
                         ;;
                     "uncompressed")
                         wget $SUPERLINK
