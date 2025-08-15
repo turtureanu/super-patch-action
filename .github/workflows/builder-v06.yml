@@ -25,6 +25,7 @@ on:
                     - tar
                     - tar.xz
                     - tar.gz
+                    - lz4
                     - zip
                     - 7z
             RESULT_FILE_NAME:
@@ -208,6 +209,10 @@ jobs:
                     "7z")
                         wget $SUPERLINK
                         7z x *.7z
+                        ;;
+                    "lz4")
+                        wget $SUPERLINK
+                        lz4 -d *.lz4
                         ;;
                     "uncompressed")
                         wget $SUPERLINK
